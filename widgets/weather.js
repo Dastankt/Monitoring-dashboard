@@ -161,9 +161,7 @@ async function fetchWeather() {
     try {
       const description = await fetchWttrDescription();
       if (description) data.description = description;
-    } catch {
-      // wttr.in — дополнение, не критично
-    }
+    } catch {}
     return data;
   } catch (openMeteoErr) {
     console.warn('open-meteo недоступен, пробуем wttr.in:', openMeteoErr);

@@ -1,13 +1,12 @@
 import { SECRETS } from './secrets.js';
 
-// Настройки дэшборда (без секретов — можно коммитить в Git)
 export const CONFIG = {
   city: 'Bishkek',
   cityCoords: { lat: 42.8746, lon: 74.5698 },
   currencyBase: 'USD',
   currencyTargets: ['USD', 'EUR', 'RUB', 'KGS'],
   newsApiKey: SECRETS.newsApiKey,
-  refreshInterval: 60000, // 60 seconds
+  refreshInterval: 60000,
   cachePrefix: 'dashboard_',
 };
 

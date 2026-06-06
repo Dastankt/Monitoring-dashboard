@@ -1,30 +1,17 @@
-# API-ключи и секреты
 secrets.js
 .env
 .env.*
 !.env.example
-
-# Зависимости
 node_modules/
-
-# Vercel
 .vercel/
-
-# Логи и кэш
 *.log
 npm-debug.log*
-
-# OS
 .DS_Store
 Thumbs.db
 desktop.ini
-
-# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
-
-# Временные файлы
 dist/
 .cache/
