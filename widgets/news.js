@@ -84,7 +84,7 @@ function formatDate(dateStr) {
 
 async function fetchNews() {
   if (!CONFIG.newsApiKey) {
-    throw new Error('Добавьте API-ключ newsdata.io в config.js');
+    throw new Error('Добавьте API-ключ newsdata.io в secrets.js');
   }
 
   const params = new URLSearchParams({
