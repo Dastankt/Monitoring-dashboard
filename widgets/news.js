@@ -1,4 +1,4 @@
-import { CONFIG, saveToCache, loadFromCache } from '../config.js';
+import { saveToCache, loadFromCache } from '../config.js';
 
 const WIDGET_ID = 'news';
 
@@ -82,25 +82,8 @@ function formatDate(dateStr) {
   return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
 }
 
-async function fetchNews() {
-  if (!CONFIG.newsApiKey) {
-    throw new Error('Добавьте API-ключ newsdata.io в secrets.js');
-  }
-
-  const params = new URLSearchParams({
-    apikey: CONFIG.newsApiKey,
-    language: 'ru',
-    country: 'kg',
-  });
-
-  const url = `https://newsdata.io/api/1/news?${params}`;
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
-  const data = await res.json();
-  if (data.status !== 'success') throw new Error(data.message || 'API error');
-
-  const articles = data.results
+function mapArticles(data) {
+  return (data.results || [])
     .filter((item) => item.title)
     .map((item) => ({
       title: item.title,
@@ -108,8 +91,26 @@ async function fetchNews() {
       source: item.source_name || item.source_id || 'Новости',
       pubDate: item.pubDate,
     }));
+}
 
-  if (!articles.length) throw new Error('Нет новостей из Кыргызстана');
+async function fetchNews() {
+  const res = await fetch('/api/news');
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.message || `HTTP ${res.status}`);
+  }
+
+  if (data.status !== 'success') {
+    throw new Error(data.message || 'API error');
+  }
+
+  const articles = mapArticles(data);
+
+  if (!articles.length) {
+    throw new Error('Нет новостей из Кыргызстана');
+  }
+
   return articles;
 }
 

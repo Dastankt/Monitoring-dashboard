@@ -1,7 +1,0 @@
-{
-  "name": "office-dashboard",
-  "private": true,
-  "scripts": {
-    "build": "node scripts/generate-secrets.js"
-  }
-}

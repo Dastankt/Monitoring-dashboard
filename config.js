@@ -3,7 +3,6 @@ export const CONFIG = {
   cityCoords: { lat: 42.8746, lon: 74.5698 },
   currencyBase: 'USD',
   currencyTargets: ['USD', 'EUR', 'RUB', 'KGS'],
-  newsApiKey: '',
   refreshInterval: 60000,
   cachePrefix: 'dashboard_',
 };

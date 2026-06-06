@@ -10,15 +10,6 @@ import {
   refreshChartTheme,
 } from './chart-setup.js';
 
-async function loadSecrets() {
-  try {
-    const { SECRETS } = await import('./secrets.js');
-    if (SECRETS.newsApiKey) CONFIG.newsApiKey = SECRETS.newsApiKey;
-  } catch (err) {
-    console.warn('secrets.js не найден, новости могут не загрузиться');
-  }
-}
-
 let isUpdating = false;
 let refreshTimer = null;
 
@@ -77,8 +68,7 @@ function initTabs() {
   });
 }
 
-async function init() {
-  await loadSecrets();
+function init() {
   initTheme();
   initClock();
   initCharts();
